@@ -6,13 +6,15 @@ host.addDeviceNameBasedDiscoveryPair(["Launchkey 25", "MIDIIN2 (Launchkey 25)"],
 host.addDeviceNameBasedDiscoveryPair(["Launchkey 25 MIDI 1", "Launchkey 25 MIDI 2"], ["Launchkey 25 MIDI 1", "Launchkey 25 MIDI 2"]); 
 
 load("launchkey_common.js");
-//load("LaunchkeyStage.js");
-/*load("net.byteheaven.LaunchkeyBlinkeys.js");
-load("net.byteheaven.LaunchkeyPatchSelectButton.js");
-load("net.byteheaven.LaunchkeyCurrentPatchDisplay.js");
-load("net.byteheaven.LaunchkeyClipsDisplay.js");
-load("net.byteheaven.PresetLoader.js");
-*/
+
+var statusPlay = false;
+var msDate1;
+var msDate2;
+var ms;
+var ms1;
+var ms2;
+
+
 
 
 function init()
@@ -141,6 +143,7 @@ var incontrol_mix = true;
 var incontrol_knobs = true;
 var incontrol_pads = true;
 
+
 function onMidi1(status, data1, data2)
 {
    //printMidi(status, data1, data2);
@@ -155,13 +158,7 @@ function onMidi1(status, data1, data2)
         
       }
 
-      else if (data1 == 105) 
-      {
-      	 incontrol_knobs = data2 == 127;
-         host.showPopupNotification(incontrol_knobs ? "Knobs: Parameters" : "Knobs: User Mappings");
-         //init = new LaunchkeyStage( host.getMidiOutPort(1) );
-         updateIndications();
-      }
+      
       /* 
       else if (data1 >= 41 && data1 <= 48)
       {
@@ -212,6 +209,30 @@ function onMidi1(status, data1, data2)
             }
          }
 
+         if (data2 == 104)
+         {
+            if (incontrol_mix)
+            {
+               cursorTrack.selectNext();
+            }
+            else
+            {
+               trackBank.scrollTracksPageUp();
+            }
+         }
+
+         else if (data1 == 105)
+         {
+           if (incontrol_mix)
+            {
+               cursorTrack.selectPrevious();
+            }
+            else
+            {
+               trackBank.scrollTracksPageUp();
+            } 
+         }
+
          /* 
          else if (data1 == 112)
          {
@@ -242,31 +263,64 @@ function onMidi1(status, data1, data2)
    }
 
    if (MIDIChannel(status) == 0 && isNoteOn(status))
-   {
-      /*if (data1 >= 96 && data1 < 104)
+     
+      /* if (status == 144)
       {
-         var i = data1 - 96;
-         primaryDevice.setParameterPage(i);
-      } */
-
-      if (data1 == 96)
-      {
-         transport.play();
+         msDate1 = new Date();
+         ms1 = ((msDate1.getSeconds() * 1000) + msDate1.getMilliseconds());
       }
+
+      if (status == 128)
+   {
+      msDate2 = new Date();
+      ms2 = ((msDate2.getSeconds() * 1000) + msDate2.getMilliseconds());
+      ms = ms2 - ms1; 
+   } */
+
+
+   {
+      //host.showPopupNotification(this.status & 0xF);
+ 
+    
+      if (data1 == 96)  // Play 
+      {
+         /*if (statusPlay == false)
+         {
+            statusPlay = true;
+         }
+         else
+         {
+            statusPlay = false;
+         }
+
+         */
+         
+            transport.play();
+         
+            host.showPopupNotification("fdfdf");
+         
+         
+      }
+
+   
+         
+         
       
       if (data1 == 97)
       {
-         transport.rewind();
+         transport.stop();
+         
       }
 
       if (data1 == 98)
       {
-         transport.fastForward();
+         transport.rewind();
+         
       }
 
       if (data1 == 99)
       {
-         transport.stop();
+         transport.fastForward();
       }
 
       if (data1 == 100)
@@ -276,7 +330,7 @@ function onMidi1(status, data1, data2)
 
       if (data1 == 101)
       {
-         transport.record();
+        
       }
 
       if (data1 == 102)
@@ -289,12 +343,9 @@ function onMidi1(status, data1, data2)
          transport.tapTempo();
       }
 
-      // MODULATION !!!!
-      
-      else if (data1 >= 112 && data1 < 120)
+      if (data1 == 112)
       {
-         var i = data1 - 112;
-         primaryDevice.getModulationSource(i).toggleIsMapping();
+         transport.togglePlay();
       }
       
 
@@ -306,9 +357,11 @@ function onMidi1(status, data1, data2)
       }
       else if (data1 == 120)
       {
-         var i = data1 - 120;
+          transport.record();
+
+         /*var i = data1 - 120;
          primaryDevice.setParameterPage(i);
-         primaryDevice.previousParameterPage();
+         primaryDevice.previousParameterPage();*/
       }
 
       /*
@@ -332,4 +385,6 @@ function onMidi1(status, data1, data2)
       } 
       */
    }
+
+
 }
