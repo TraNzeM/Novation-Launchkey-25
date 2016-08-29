@@ -7,16 +7,23 @@ host.addDeviceNameBasedDiscoveryPair(["Launchkey 25 MIDI 1", "Launchkey 25 MIDI 
 
 load("launchkey_common.js");
 //load("LaunchkeyStage.js");
-/*load("net.byteheaven.LaunchkeyBlinkeys.js");
-load("net.byteheaven.LaunchkeyPatchSelectButton.js");
+//load("net.byteheaven.LaunchkeyBlinkeys.js");
+/*load("net.byteheaven.LaunchkeyPatchSelectButton.js");
 load("net.byteheaven.LaunchkeyCurrentPatchDisplay.js");
 load("net.byteheaven.LaunchkeyClipsDisplay.js");
 load("net.byteheaven.PresetLoader.js");
 */
 
 
+
+
 function init()
 {
+   
+
+
+
+
    host.getMidiInPort(0).createNoteInput("Keys", "80????", "90????", "B001??", "D0????", "E0????");
    host.getMidiInPort(0).createNoteInput("Pads", "89????", "99????");
 
@@ -158,7 +165,7 @@ function onMidi1(status, data1, data2)
       else if (data1 == 105) 
       {
       	 incontrol_knobs = data2 == 127;
-         host.showPopupNotification(incontrol_knobs ? "Knobs: Parameters" : "Knobs: User Mappings");
+         
          //init = new LaunchkeyStage( host.getMidiOutPort(1) );
          updateIndications();
       }
@@ -212,6 +219,11 @@ function onMidi1(status, data1, data2)
             }
          }
 
+         if (data2 == 104)
+         {
+
+         }
+
          /* 
          else if (data1 == 112)
          {
@@ -251,7 +263,9 @@ function onMidi1(status, data1, data2)
 
       if (data1 == 96)
       {
-         transport.play();
+         //var i = data1 - 96;
+         transport.play().toggleClick();
+         //host..toggleIsMapping();
       }
       
       if (data1 == 97)
@@ -332,4 +346,6 @@ function onMidi1(status, data1, data2)
       } 
       */
    }
+
+
 }
