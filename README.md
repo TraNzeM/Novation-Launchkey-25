@@ -1,1 +1,1 @@
-Novation Launchkey 25
+Novation Launchkey Mini mk2
