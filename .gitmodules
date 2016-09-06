@@ -1,0 +1,3 @@
+[submodule "Framework"]
+	path = Framework
+	url = https://github.com/teotigraphix/Framework4Bitwig.git
