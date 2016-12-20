@@ -2,7 +2,7 @@ loadAPI(1);
 
 host.defineController("Novation", "Launchkey Mini", "1.0", "2ebc4a00-6da2-11e6-bdf4-0800200c9a66");
 host.defineMidiPorts(2, 2);
-host.addDeviceNameBasedDiscoveryPair(["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"], ["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"]);
+host.addDeviceNameBasedDiscoveryPair(["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"], ["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl");
 
 load("launchkey_common.js");
 
