@@ -2,7 +2,7 @@ loadAPI(1);
 
 host.defineController("Novation", "Launchkey Mini", "1.0", "2ebc4a00-6da2-11e6-bdf4-0800200c9a66");
 host.defineMidiPorts(2, 2);
-host.addDeviceNameBasedDiscoveryPair(["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"], ["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl");
+host.addDeviceNameBasedDiscoveryPair(["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"], ["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"]);
 
 load("launchkey_common.js");
 
@@ -124,7 +124,7 @@ function onMidi0(status, data1, data2) {
          {
             trackBank.getTrack(buttonIndex).select();
          }
-      } 
+      }
       */
     }
 }
@@ -178,7 +178,7 @@ function onMidi1(status, data1, data2) {
         }
     }
 
-    if (MIDIChannel(status) == 0 && isNoteOn(status))
+    if (MIDIChannel(status) === 0 && isNoteOn(status))
 
     /* if (status == 144)
       {
@@ -190,7 +190,7 @@ function onMidi1(status, data1, data2) {
    {
       msDate2 = new Date();
       ms2 = ((msDate2.getSeconds() * 1000) + msDate2.getMilliseconds());
-      ms = ms2 - ms1; 
+      ms = ms2 - ms1;
    } */
 
 
@@ -198,7 +198,7 @@ function onMidi1(status, data1, data2) {
         //host.showPopupNotification(this.status & 0xF);
 
 
-        if (data1 == 96) // Play 
+        if (data1 == 96) // Play
         {
             /*if (statusPlay == false)
          {
@@ -280,7 +280,7 @@ function onMidi1(status, data1, data2) {
          incontrol_pads = data2 == 127;
          host.showPopupNotification(incontrol_pads ? "Parameter Page & Modulation" : "Drum Pads");
          updateIndications();
-      } 
+      }
       */
     }
 }
