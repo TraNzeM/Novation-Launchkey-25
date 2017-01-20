@@ -1,6 +1,6 @@
 loadAPI(1);
 
-host.defineController("Novation", "Launchkey Mini", "1.0", "2ebc4a00-6da2-11e6-bdf4-0800200c9a66");
+host.defineController("Novation", "Launchkey Mini", "1.0", "ba882f07-444e-4267-b8e7-ec4e5dca74e9");
 host.defineMidiPorts(2, 2);
 host.addDeviceNameBasedDiscoveryPair(["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"], ["Launchkey Mini LK Mini MIDI", "Launchkey Mini LK Mini InControl"]);
 
@@ -13,15 +13,7 @@ var ms;
 var ms1;
 var ms2;
 
-
-
-
 function init() {
-
-
-
-
-
     host.getMidiInPort(0).createNoteInput("Keys", "80????", "90????", "B001??", "D0????", "E0????");
     host.getMidiInPort(0).createNoteInput("Pads", "89????", "99????");
 
@@ -52,8 +44,8 @@ function init() {
 
     userControls = host.createUserControlsSection(8);
 
-    for (var p = 0; p < 8; p++) {
-        userControls.getControl(p).setLabel("User " + (p + 1));
+    for (var o = 0; o < 8; o++) {
+        userControls.getControl(p).setLabel("User " + (o + 1));
     }
 
     sendMidi(0x90, 0x0C, 0x7F);

@@ -16,31 +16,28 @@ function updateOutputState()  // set color
    {
       pendingLedstate[i] = (selectedPage == i)
          ? mixColour(3, 3, false)
-         : (i < numParameterPages) ? mixColour(1, 1, false) : 0; 
+         : (i < numParameterPages) ? mixColour(1, 1, false) : 0;
 
 
       var j = i + 9;
 
       pendingLedstate[j] = (modSourceStates.values[i])
          ? (blink ? mixColour(1, 3, false) : mixColour(0, 1, false))
-         : 0; 
-   } 
+         : 0;
+   }
   */
 
 pendingLedstate[17] = 15; // bottom round
 
-  if (statusPlay == false)
-  {
-   pendingLedstate[0] = 45;
-  }
-  else
-  {
-   pendingLedstate[0] = 15
-         ? (blink ? mixColour(1, 3, false) : mixColour(0, 1, false))
-         : 0; 
-  }
+if (statusPlay === false) {
+    pendingLedstate[0] = 45;
+} else {
+    pendingLedstate[0] = 15 ?
+        (blink ? mixColour(1, 3, false) : mixColour(0, 1, false)) :
+        0;
+}
 
-pendingLedstate[1] = 62; // stop 
+pendingLedstate[1] = 62; // stop
 pendingLedstate[2] = 29; // rewind
 pendingLedstate[3] = 29; // forward
 pendingLedstate[4] = 39; // loop
@@ -72,7 +69,7 @@ function flushOutputState()
    }
 }
 
-   
+
 
 /* Simple buffer array with setter. */
 
@@ -82,14 +79,12 @@ function BufferedElementArray(initialVal, count)
 }
 
 /* Return a setter function for the specific index. */
-BufferedElementArray.prototype.setter = function(index)
-{
-   var obj = this;
+BufferedElementArray.prototype.setter = function(index) {
+    var obj = this;
 
-   return function(data)
-   {
-      obj.set(index, data);
-   }
+    return function(data) {
+        obj.set(index, data);
+    };
 };
 
 BufferedElementArray.prototype.set = function(index, data)
